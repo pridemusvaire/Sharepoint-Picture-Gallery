@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<%@ Page Language="C#" %>
+	<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
+	<head runat="server">
+		<meta name="WebPartPageExpansion" content="full" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Untitled 1</title>
+		<style media="screen">
+			img {
+				width: 50px;
+				height: 50px;
+			}
+
+			#data-container {
+				width: 600px;
+				height: 200px;
+				overflow: auto;
+			}
+
+			#data-container ul li {
+				display: inline-block;
+			}
+		</style>
+		<link rel="stylesheet" href="http://myfnb/PeopleGallery/galleryTest/pagination.css" />
+	</head>
+
+	<body>
+
+		<div class="image">
+		</div>
+		<div id="data-container">
+			<ul>
+			</ul>
+		</div>
+		<div id="pagination-container">
+		</div>
+		<script type="text/javascript" src="http://myfnb/PeopleGallery/galleryTest/jquery-2.2.4.min.js">
+		</script>
+		<script type="text/javascript" src="http://myfnb/PeopleGallery/galleryTest/handlebars-v4.0.5.js">
+		</script>
+		<script type="text/javascript" src="http://myfnb/PeopleGallery/galleryTest/templates.js">
+		</script>
+		<script type="text/javascript" src="http://myfnb/PeopleGallery/galleryTest/jquery.SPServices-2014.02.js">
+		</script>
+		<script type="text/javascript" src="http://myfnb/PeopleGallery/galleryTest/pagination.min.js">
+		</script>
+		<script type="text/javascript">
+			// //get url
+			function getUrlVars() {
+				var vars = {};
+				var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
+					vars[key] = value;
+				});
+				return vars;
+			}
+
+			var list = getUrlVars()["list"];
+
+
+			for (var i = 0; i < list.length; i++) {
+
+				list = list.replace("%20", " ");
+
+			}
+
+
+			console.log(list);
+
+			var getList = $().SPServices.SPGetListItemsJson({
+				operation: "GetListItems",
+				listName: list,
+				async: true,
+
+			});
+
+			$.when(getList).done(function() {
+
+				var data = this.data;
+				var url;
+				var id;
+
+
+				$('#pagination-container').pagination({
+					dataSource: data,
+					pageSize: 10,
+					// formatResult: function(data) {
+					//     for (var i = 0, len = data.length; i < len; i++) {
+					//
+					//         url = data[i].FileRef.lookupValue;
+					//         id = data[i].FileRef.lookupId;
+					//         $(".image").append('<img src="http://myfnb/' + url + '" alt="" id="' + id + '">');
+					//     }
+					// },
+
+					callback: function(data, pagination) {
+						var template = Handlebars.templates['images'];
+
+						var imagedata = {
+							image: data
+						};
+
+						var compiled = template(imagedata);
+
+						$("#data-container ul").html(compiled);
+
+						console.log(data);
+					}
+				});
+			});
+		</script>
+
+	</body>
+
+	</html>

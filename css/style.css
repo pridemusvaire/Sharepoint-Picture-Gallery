@@ -1,0 +1,114 @@
+ul
+{
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.gallery-container
+{
+    position: relative;
+
+    width: 800px;
+    margin: 0 auto;
+}
+
+.click-to-view img
+{
+    position: absolute;
+
+    max-width: 200%;
+    height: auto;
+}
+
+#data-container
+{
+    overflow: auto;
+
+    width: 800px;
+    height: auto;
+    margin: 0 auto;
+}
+
+#data-container ul
+{
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+
+    margin: 0;
+    padding: 0;
+}
+
+#data-container > ul > li
+{
+    position: relative;
+
+    display: inline-block;
+    overflow: hidden;
+
+    width: 180px;
+    height: 240px;
+    margin-right: 10px;
+
+    border-right: 1px solid #f90;
+}
+
+#data-container > ul > li .click-to-view
+{
+    position: relative;
+
+    display: inline-block;
+    overflow: hidden;
+
+    width: 180px;
+    height: 180px;
+
+    cursor: pointer;
+}
+
+.modal
+{
+    position: absolute;
+    top: 0;
+
+    display: none;
+
+    width: 100%;
+    height: auto;
+    padding-bottom: 30px;
+
+    background: rgba(0, 0, 0, .5);
+}
+
+.modal img
+{
+    position: relative;
+
+    margin-top: 10%;
+}
+
+.likes
+{
+    width: 16px;
+    height: 16px;
+    padding-left: 25px;
+
+    border: none;
+    background: url('../img/like-thumb-up.png') no-repeat left center;
+}
+
+.gallery-item-container .likes
+{
+    cursor: pointer;
+}
+
+.views
+{
+    width: 16px;
+    height: 16px;
+    padding-left: 25px;
+
+    border: none;
+    background: url('../img/eye.png') no-repeat left center;
+}

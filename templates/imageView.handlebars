@@ -1,0 +1,9 @@
+{{#each image}}
+<img src="/{{FileRef.lookupValue}}" alt="" />
+<div class="imagedata {{FileRef.lookupId}}">
+  <ul>
+    <li><button type="button" name="button" class="views"> <span>{{Views}}</span></button></li>
+    <li><button type="button" name="button" class="likes" onclick="likeit({{FileRef.lookupId}}, {{Likes}})"> <span>{{Likes}}</span></button> </li>
+  </ul>
+</div>
+{{/each}}

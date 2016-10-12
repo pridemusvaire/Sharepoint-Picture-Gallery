@@ -1,0 +1,4 @@
+{{#each image}}
+<textarea name="" id="commentText" onkeyup="checkComment()" maxlength="225" placeholder="my comment"></textarea>
+<button id="postComment" class="post chatBtnBackground" onclick="postComment({{FileRef.lookupId}})">Post</button>
+{{/each}}
